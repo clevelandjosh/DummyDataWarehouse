@@ -1,12 +1,12 @@
 # DummyDataWarehouse
-### This sets up a dummy data warehouse with two little tables and data generated with Faker 
-##### (Faker is pretty awesome, shout out to that project, woot woot! 
-##### For details or to make your own content, faker.readthedocs.io. No affiliation)
+### This sets up a dummy database with two little tables and data generated with Faker.
+##### Faker is pretty awesome, shout out to that project, woot woot! 
+##### For details, or to make your own content, go to faker.readthedocs.io. No affiliation.
 
 ##### The layout is pretty simple
-##### Database - DummyDataWarehouse
+##### Database - DummyDataWarehouse, used 5.5.56-MariaDB, for Linux (x86_64).
 
-##### This is how it is spun up (pretty much the same as the uploaded .sql contents, but please feel free to inspect the content)
+##### This is how the database DummyDataWarehouse is spun up (pretty much the same as the uploaded .sql contents, but please feel free to inspect the content).
 
 ####
 ```
@@ -15,8 +15,8 @@ CREATE TABLE customerCreditCard(customerNumber INT(32), dateExpire VARCHAR(16), 
 CREATE TABLE customerContact (customerNumber INT(32), firstName VARCHAR(64), lastName VARCHAR(64), socialNumber VARCHAR(16), s    treetAddress VARCHAR(255), city VARCHAR(128), stateAbbr VARCHAR(8), zipPlus VARCHAR(16), phoneNumber VARCHAR(32)) ;
 ```
  
-#### Faker scripts create dummy content, written in python
-#### For the customer information
+#### Faker scripts create dummy content. These are written in python.
+#### For the customer information creation :
 ```
 from faker import Faker
 fake = Faker('en_US')
@@ -33,8 +33,8 @@ fake = Faker('en_US')
  print "," , fake.phone_number()
 
 ```
-#### For the credit card information
-####
+#### For the credit card information creation :
+
 ```
 from faker import Faker
 fake = Faker('en_US')
@@ -47,7 +47,7 @@ for i in range(0,10000):
  print "," , fake.credit_card_security_code(card_type=None)
 
 ```
-#### Then the Faker created files are pulled in. 
+#### Then, the Faker created files are pulled in. 
  
 ```
   LOAD DATA LOCAL INFILE 'creditcard.txt' INTO TABLE customerCreditCard COLUMNS TERMINATED BY ',';
@@ -55,8 +55,8 @@ for i in range(0,10000):
   LOAD DATA LOCAL INFILE 'customer_contact.txt' INTO TABLE customerContact COLUMNS TERMINATED BY ',';
 ```
   
-#### Then there will be two tables that look roughly like : 
-#### 
+#### Then there will be two tables.
+
 ```
   MariaDB [DummyDataWarehouse]> select * from customerCreditCard LIMIT 10;
 +----------------+------------+-------------------------------+--------------------+-----------+
@@ -95,6 +95,10 @@ MariaDB [DummyDataWarehouse]> select * from  customerContact LIMIT 10;
   
 ```
 
+#### You can use the DummyDataWarehouse.sql to import the database, too.
+```
+mysql -u username -p database_name < DummyDataWarehouse.sql
+```
 #### Hope this helps someone needing to spin up a quick database. 
 #### Any overlap with real names, credit card information, socials, and addresses is purely coincidental. 
   
