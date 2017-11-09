@@ -1,24 +1,25 @@
 # DummyDataWarehouse
-## This sets up a dummy data warehouse with two little tables and data generated with Faker (which is pretty awesome!)
+### This sets up a dummy data warehouse with two little tables and data generated with Faker 
+#### (which is pretty awesome!)
 
-### The layout is pretty simple
-### Database - DummyDataWarehouse
+##### The layout is pretty simple
+##### Database - DummyDataWarehouse
 
-### This is how it is spun up (pretty much the .sql contents, but feel free to inspect the content)
+##### This is how it is spun up (pretty much the .sql contents, but feel free to inspect the content)
 
-'''
- CREATE TABLE customerCreditCard(customerNumber INT(32), dateExpire VARCHAR(16), cardProvider VARCHAR(32), cardNumber VARCHAR(255), cvvNumber INT(16)) ;
+####```
+CREATE TABLE customerCreditCard(customerNumber INT(32), dateExpire VARCHAR(16), cardProvider VARCHAR(32), cardNumber VARCHAR(255), cvvNumber INT(16)) ;
  
-  CREATE TABLE customerContact (customerNumber INT(32), firstName VARCHAR(64), lastName VARCHAR(64), socialNumber VARCHAR(16), s    treetAddress VARCHAR(255), city VARCHAR(128), stateAbbr VARCHAR(8), zipPlus VARCHAR(16), phoneNumber VARCHAR(32)) ;
- '''
+CREATE TABLE customerContact (customerNumber INT(32), firstName VARCHAR(64), lastName VARCHAR(64), socialNumber VARCHAR(16), s    treetAddress VARCHAR(255), city VARCHAR(128), stateAbbr VARCHAR(8), zipPlus VARCHAR(16), phoneNumber VARCHAR(32)) ;
+#### ```
  
- ### Faker scripts create dummy content
- ### For the customer information
- '''
- from faker import Faker
-fake = Faker('en_US')
+Faker scripts create dummy content
+For the customer information
+####```
+#### from faker import Faker
+#### fake = Faker('en_US')
 
-for i in range(0,10000):
+#### for i in range(0,10000):
  print(i) ,
  print "," , fake.first_name() ,
  print "," , fake.last_name() ,
@@ -31,7 +32,7 @@ for i in range(0,10000):
 
  '''
  ### For the credit card information
- '''
+####```
 from faker import Faker
 fake = Faker('en_US')
 
@@ -42,18 +43,17 @@ for i in range(0,10000):
  print "," , fake.credit_card_number(card_type=None) ,
  print "," , fake.credit_card_security_code(card_type=None)
 
- '''
+#### ```
+#### Then the Faker (from here: faker.readthedocs.io) created files are pulled in. 
  
- ### Then the Faker (from here: faker.readthedocs.io) created files are pulled in. 
- 
- '''
+#### ```
   LOAD DATA LOCAL INFILE 'creditcard.txt' INTO TABLE customerCreditCard COLUMNS TERMINATED BY ',';
   
   LOAD DATA LOCAL INFILE 'customer_contact.txt' INTO TABLE customerContact COLUMNS TERMINATED BY ',';
-  '''
+````
   
   ### Then there will be two tables that look roughly like : 
-  '''
+##### ```
   MariaDB [DummyDataWarehouse]> select * from customerCreditCard LIMIT 10;
 +----------------+------------+-------------------------------+--------------------+-----------+
 | customerNumber | dateExpire | cardProvider                  | cardNumber         | cvvNumber |
@@ -86,11 +86,11 @@ MariaDB [DummyDataWarehouse]> select * from  customerContact LIMIT 10;
 |              8 |  Stephanie  |  Lee       |  857-67-7991  |  88172 Miller Plains Apt. 642   |  Lake Chad           |  GA       |  24557-2950  |  250-333-5    633x3125   |
 |              9 |  Derek      |  Miller    |  070-57-3498  |  87918 Barbara Gateway          |  Marcusview          |  NE       |  79278-4587  |  +67(6)220    0364816    |
 +----------------+-------------+------------+---------------+---------------------------------+----------------------+-----------+--------------+-----------    -----------+
-10 rows in set (0.00 sec)
+#### 10 rows in set (0.00 sec)
 
   
-  '''
+```
   
-  ## Hope this helps someone needing to spin up a quick database. 
-  ## Any overlap with real names, credit card information, socials, and addresses is purely coincidental. 
+  ### Hope this helps someone needing to spin up a quick database. 
+  #### Any overlap with real names, credit card information, socials, and addresses is purely coincidental. 
   
