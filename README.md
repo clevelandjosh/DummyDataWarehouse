@@ -1,11 +1,12 @@
 # DummyDataWarehouse
 ### This sets up a dummy data warehouse with two little tables and data generated with Faker 
-#### (Faker is pretty awesome, shout out to that project, woot woot!)
+##### (Faker is pretty awesome, shout out to that project, woot woot! 
+##### For details or to make your own content, faker.readthedocs.io. No affiliation)
 
 ##### The layout is pretty simple
 ##### Database - DummyDataWarehouse
 
-##### This is how it is spun up (pretty much the .sql contents, but feel free to inspect the content)
+##### This is how it is spun up (pretty much the same as the uploaded .sql contents, but please feel free to inspect the content)
 
 ####
 ```
@@ -14,7 +15,7 @@ CREATE TABLE customerCreditCard(customerNumber INT(32), dateExpire VARCHAR(16), 
 CREATE TABLE customerContact (customerNumber INT(32), firstName VARCHAR(64), lastName VARCHAR(64), socialNumber VARCHAR(16), s    treetAddress VARCHAR(255), city VARCHAR(128), stateAbbr VARCHAR(8), zipPlus VARCHAR(16), phoneNumber VARCHAR(32)) ;
 ```
  
-#### Faker scripts create dummy content
+#### Faker scripts create dummy content, written in python
 #### For the customer information
 ```
 from faker import Faker
@@ -46,7 +47,7 @@ for i in range(0,10000):
  print "," , fake.credit_card_security_code(card_type=None)
 
 ```
-#### Then the Faker (from here: faker.readthedocs.io) created files are pulled in. 
+#### Then the Faker created files are pulled in. 
  
 ```
   LOAD DATA LOCAL INFILE 'creditcard.txt' INTO TABLE customerCreditCard COLUMNS TERMINATED BY ',';
