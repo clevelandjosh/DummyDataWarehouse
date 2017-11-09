@@ -1,6 +1,6 @@
 # DummyDataWarehouse
 ### This sets up a dummy data warehouse with two little tables and data generated with Faker 
-#### (which is pretty awesome!)
+#### (Faker is pretty awesome, shout out to that project, woot woot!)
 
 ##### The layout is pretty simple
 ##### Database - DummyDataWarehouse
